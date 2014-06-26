@@ -1,0 +1,19 @@
+#!/usr/bin/env groovy
+import groovy.text.SimpleTemplateEngine
+
+def username = System.console().readLine 'Please enter your email: '
+def passwd = System.console().readPassword 'Please enter your password (same as the wiki): '
+
+def getGrapeTemplateFile() {
+	def scriptFile = new File(getClass().protectionDomain.codeSource.location.toURI())
+	def rootProjectDir = scriptFile.parentFile.parent
+	new File("${rootProjectDir}/conf/grapeConfig.xml")
+}
+
+def bindings = [username: username, password: passwd]
+def engine = new SimpleTemplateEngine()
+def grapeConfig = engine.createTemplate(getGrapeTemplateFile()).make(bindings)
+
+def homeDir = System.getProperty("user.home")
+def grapeConfigFile = new File("${homeDir}/.groovy/grapeConfig.xml")
+grapeConfigFile.write(grapeConfig.toString())

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-settings>
+  <settings defaultResolver="main" />
+  <credentials host="repository.hybris.com" realm="Artifactory Realm" username="${username}" passwd="${password}" />
+  <resolvers>
+    <chain name="main">
+      <ibiblio name="public" m2compatible="true" root="https://repository.hybris.com/repo" />
+    </chain>
+  </resolvers>
+</ivy-settings>
+
